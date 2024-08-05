@@ -2,9 +2,9 @@
 ../Utils/Src/process.c:36:5:check_arg	6
 ../Utils/Src/process.c:58:6:handleLedOnCommand	3
 ../Utils/Src/process.c:66:6:handleLedOffCommand	3
-../Utils/Src/process.c:73:6:handleLedBlinkCommand	5
-../Utils/Src/process.c:95:6:startBlinking	4
-../Utils/Src/process.c:107:6:handleAdcGetCommand	5
-../Utils/Src/process.c:139:6:handleInfoCommand	2
-../Utils/Src/process.c:148:6:handleInvalidCommand	1
-../Utils/Src/process.c:154:6:prompt	1
+../Utils/Src/process.c:73:6:handleLedBlinkCommand	2
+../Utils/Src/process.c:80:6:startBlinking	4
+../Utils/Src/process.c:92:6:handleAdcGetCommand	5
+../Utils/Src/process.c:124:6:handleInfoCommand	2
+../Utils/Src/process.c:133:6:handleInvalidCommand	1
+../Utils/Src/process.c:139:6:prompt	1

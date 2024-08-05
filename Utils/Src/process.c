@@ -71,26 +71,11 @@ void handleLedOffCommand(char *args) {
 	}
 }
 void handleLedBlinkCommand(char *args) {
-	uint8_t pins[3];  // Mảng để lưu trữ các giá trị pin
-	int count = 0;
-	char *token = strtok(args, " ");
-	while (token != NULL) {
-		uint8_t pin = atoi(token);
-		if (pin >= 4 && pin <= 8) {
-			pins[count++] = pin;
-		} else {
-			UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA4, PA5, PA6, PA7, and PA8 are allowed.");
-			return;
-		}
-		if (count > 3) {
-			UART_SendString(&uart1.huart, "\r\nError: Too many arguments");
-			return;
-		}
-		token = strtok(NULL, " ");
+	if(check_arg(args)){
+		stopBlink = 1;
+		UART_SendString(&uart1.huart, "\r\n");
+		startBlinking(pins, count);
 	}
-	stopBlink = 1;
-	UART_SendString(&uart1.huart, "\r\n");
-	startBlinking(pins, count);
 }
 void startBlinking(uint8_t *pins, int count) {
 	while (stopBlink) {
