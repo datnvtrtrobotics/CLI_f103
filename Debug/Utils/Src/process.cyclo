@@ -1,0 +1,9 @@
+../Utils/Src/process.c:21:6:processCommand	3
+../Utils/Src/process.c:34:6:handleLedOnCommand	5
+../Utils/Src/process.c:54:6:handleLedOffCommand	5
+../Utils/Src/process.c:73:6:handleLedBlinkCommand	5
+../Utils/Src/process.c:95:6:startBlinking	4
+../Utils/Src/process.c:107:6:handleAdcGetCommand	5
+../Utils/Src/process.c:139:6:handleInfoCommand	2
+../Utils/Src/process.c:148:6:handleInvalidCommand	1
+../Utils/Src/process.c:154:6:prompt	1

@@ -1,0 +1,9 @@
+../Utils/Src/process.c:21:6:processCommand	32	static
+../Utils/Src/process.c:34:6:handleLedOnCommand	32	static
+../Utils/Src/process.c:54:6:handleLedOffCommand	32	static
+../Utils/Src/process.c:73:6:handleLedBlinkCommand	32	static
+../Utils/Src/process.c:95:6:startBlinking	24	static
+../Utils/Src/process.c:107:6:handleAdcGetCommand	88	static
+../Utils/Src/process.c:139:6:handleInfoCommand	120	static
+../Utils/Src/process.c:148:6:handleInvalidCommand	16	static
+../Utils/Src/process.c:154:6:prompt	8	static
