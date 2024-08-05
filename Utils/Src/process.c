@@ -30,44 +30,44 @@ void processCommand(char *cmd)
     }
     handleInvalidCommand(NULL);
 }
+int count = 0;
+uint8_t pins[3];
 
+int check_arg(char *args) {
+    char *token = strtok(args, " ");
+    count = 0;
+    while (token != NULL) {
+        uint8_t pin = atoi(token);
+        if (pin >= 4 && pin <= 8) {
+            if (count < 3) {
+                pins[count] = pin;
+            }
+            count++;
+        } else {
+            UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA4, PA5, PA6, PA7, and PA8 are allowed.");
+            return 0;
+        }
+        token = strtok(NULL, " ");
+    }
+    if (count > 3) {
+        UART_SendString(&uart1.huart, "\r\nError: Too many arguments.");
+        return 0;
+    }
+    return 1;
+}
 void handleLedOnCommand(char *args) {
-	char *token = strtok(args, " ");
-	int count = 0;
-	while (token != NULL) {
-		uint8_t pin = atoi(token);
-		if (pin >= 4 && pin <= 8) {
-			HAL_GPIO_WritePin(GPIOA, 1 << pin, GPIO_PIN_SET);
-			count++;
-		}else {
-			UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA4, PA5, PA6, PA7, and PA8 are allowed.");
-			return;
+	if(check_arg(args)){
+		for (int i = 0; i < count; i++) {
+			HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_SET);
 		}
-		if (count > 3){
-			UART_SendString(&uart1.huart, "\r\nError: Too many arguments");
-			return;
-		}
-		token = strtok(NULL, " ");
 	}
 }
 
 void handleLedOffCommand(char *args) {
-	char *token = strtok(args, " ");
-	int count = 0;
-
-	while (token != NULL) {
-		uint8_t pin = atoi(token);
-		if (pin >= 4 && pin <= 8) {
-			HAL_GPIO_WritePin(GPIOA, 1 << pin, GPIO_PIN_RESET);
-		} else {
-			UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA4, PA5, PA6, PA7, and PA8 are allowed.");
-			return;
+	if(check_arg(args)){
+		for (int i = 0; i < count; i++) {
+			HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_RESET);
 		}
-		if (count > 3){
-			UART_SendString(&uart1.huart, "\r\nError: Too many arguments");
-			return;
-		}
-		token = strtok(NULL, " ");
 	}
 }
 void handleLedBlinkCommand(char *args) {
