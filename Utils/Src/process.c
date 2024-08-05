@@ -44,7 +44,7 @@ void handleLedOnCommand(char *args) {
 			return;
 		}
 		if (count > 3){
-			UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA4, PA5, PA6, PA7, and PA8 are allowed.");
+			UART_SendString(&uart1.huart, "\r\nError: Too many arguments");
 			return;
 		}
 		token = strtok(NULL, " ");
@@ -64,7 +64,7 @@ void handleLedOffCommand(char *args) {
 			return;
 		}
 		if (count > 3){
-			UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA4, PA5, PA6, PA7, and PA8 are allowed.");
+			UART_SendString(&uart1.huart, "\r\nError: Too many arguments");
 			return;
 		}
 		token = strtok(NULL, " ");
