@@ -6,138 +6,51 @@
  */
 
 #include "process.h"
+#include "uart.h"
+#include "GPIO_handle.h"
+#include <stdlib.h>
+#include <string.h>
 
-volatile uint8_t stopBlink = 0;
-uint8_t stopCmd;
-CommandMapping commandMap[] = {
-    {"led-on", handleLedOnCommand},
-    {"led-off", handleLedOffCommand},
-    {"led-blink", handleLedBlinkCommand},
-    {"adc-get", handleAdcGetCommand},
-    {"info", handleInfoCommand},
-    {NULL, handleInvalidCommand}
-};
+#define PROMPT "#your-name:~ "
+#define MAX_COUNT	3
+#define MIN_PINLED	0
+#define MAX_PINLED	8
+int check_arg(char *args);
 
-void processCommand(char *cmd)
-{
+void processCommand(CommandMapping *ptr, char *cmd){
     char *token = strtok(cmd, " ");
-    for (int i = 0; commandMap[i].command != NULL; i++) {
-        if (strcmp(token, commandMap[i].command) == 0) {
-            commandMap[i].handler(strtok(NULL, ""));	//strtok(NULL, "" chính là phần còn lại sau khi tách lệnh, phần này là phần đối số
-            prompt();
+    for (CommandMapping *mapping = ptr; mapping->command != NULL; mapping++) {
+        if (strcmp(token, mapping->command) == 0) {
+        	char *token = strtok(NULL, " ");
+			count = 0;
+			while (token != NULL) {
+				uint8_t pin = atoi(token);
+				if (pin >= MIN_PINLED && pin <= MAX_PINLED) {
+					if (count < MAX_COUNT) {
+						pins[count] = pin;
+					}
+					count++;
+				} else {
+					UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA4, PA5, PA6, PA7, and PA8 are allowed.");
+				}
+				token = strtok(NULL, " ");
+			}
+			if (count > MAX_COUNT) {
+				UART_SendString(&uart1.huart, "\r\nError: Too many arguments.");
+			}
+        	mapping->handler(strtok(NULL, ""));	//strtok(NULL, "" chính là phần còn lại sau khi tách lệnh, phần này là phần đối số
+        	prompt();
             return;
         }
     }
     handleInvalidCommand(NULL);
 }
-int count = 0;
-uint8_t pins[3];
-
-int check_arg(char *args) {
-    char *token = strtok(args, " ");
-    count = 0;
-    while (token != NULL) {
-        uint8_t pin = atoi(token);
-        if (pin >= 4 && pin <= 8) {
-            if (count < 3) {
-                pins[count] = pin;
-            }
-            count++;
-        } else {
-            UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA4, PA5, PA6, PA7, and PA8 are allowed.");
-            return 0;
-        }
-        token = strtok(NULL, " ");
-    }
-    if (count > 3) {
-        UART_SendString(&uart1.huart, "\r\nError: Too many arguments.");
-        return 0;
-    }
-    return 1;
-}
-void handleLedOnCommand(char *args) {
-	if(check_arg(args)){
-		for (int i = 0; i < count; i++) {
-			HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_SET);
-		}
+void checkCtrlC(uint8_t data){
+	if (data == 0x03){
+		UART_SendString(&uart1.huart, "^C\n\r"PROMPT);
 	}
 }
-
-void handleLedOffCommand(char *args) {
-	if(check_arg(args)){
-		for (int i = 0; i < count; i++) {
-			HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_RESET);
-		}
-	}
-}
-void handleLedBlinkCommand(char *args) {
-	if(check_arg(args)){
-		stopBlink = 1;
-		UART_SendString(&uart1.huart, "\r\n");
-		startBlinking(pins, count);
-	}
-}
-void startBlinking(uint8_t *pins, int count) {
-	while (stopBlink) {
-		for (int i = 0; i < count; i++) {
-			HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_SET);
-		}
-		HAL_Delay(200);
-		for (int i = 0; i < count; i++) {
-			HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_RESET);
-		}
-		HAL_Delay(200);
-	}
-}
-void handleAdcGetCommand(char *args) {
-	uint8_t pin = atoi(args);
-
-    ADC_ChannelConfTypeDef sConfig = {0};
-    if (pin == 0 || pin == 1) {
-        // Cấu hình kênh ADC tương ứng với chân PA0 hoặc PA1
-        sConfig.Channel = (pin == 0) ? ADC_CHANNEL_0 : ADC_CHANNEL_1;
-        sConfig.Rank = ADC_REGULAR_RANK_1;
-        sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES_5;
-
-        if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
-            UART_SendString(&uart1.huart, "\r\nError: Failed to configure ADC channel.");
-            return;
-        }
-        stopBlink = 1;
-        while (stopBlink) {
-            HAL_ADC_Start(&hadc1);
-            HAL_ADC_PollForConversion(&hadc1, 100);
-            uint32_t value = HAL_ADC_GetValue(&hadc1);
-            HAL_ADC_Stop(&hadc1);
-
-            char msg[50];
-            sprintf(msg, "\r\nADC Value (PA%d): %lu", pin, value);
-            HAL_UART_Transmit(&uart1.huart, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-
-            HAL_Delay(1000);
-        }
-    } else {
-        UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA0 and PA1 are allowed.");
-    }
-}
-
-void handleInfoCommand(char *args) {
-	if (args != NULL) {
-		char response[100];
-		snprintf(response, sizeof(response), "\r\nSample text: %s", args);
-		HAL_UART_Transmit(&uart1.huart, (uint8_t*)response, strlen(response), HAL_MAX_DELAY);
-	} else {
-		HAL_UART_Transmit(&uart1.huart, (uint8_t*)"Sample text: \r\n", 15, HAL_MAX_DELAY);
-	}
-}
-void handleInvalidCommand(char *args) {
-    UART_SendString(&uart1.huart, "\n\rInvalid Command");
-    prompt();
-
-}
-
 void prompt(){
-	UART_SendString(&uart1.huart, "\n\r");
-	UART_SendString(&uart1.huart, PROMPT);
+	UART_SendString(&uart1.huart, "\n\r"PROMPT);
 }
 

@@ -1,4 +1,2 @@
-../Utils/Src/circular_bf.c:14:6:CircularBuffer_Write	24	static
-../Utils/Src/circular_bf.c:23:5:CircularBuffer_Read	16	static
-../Utils/Src/circular_bf.c:31:6:CheckAndPrintReceivedData	16	static
-../Utils/Src/circular_bf.c:48:6:checkCtrlC	16	static
+../Utils/Src/circular_bf.c:12:5:CircularBuffer_Write	24	static
+../Utils/Src/circular_bf.c:22:5:CircularBuffer_Read	16	static

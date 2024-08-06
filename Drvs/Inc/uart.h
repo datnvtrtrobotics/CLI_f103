@@ -9,9 +9,7 @@
 #define __UART_H
 
 #include "stm32f1xx_hal.h"
-#include "circular_bf.h"
-#include <stdio.h>
-#include <string.h>
+
 typedef struct {
     uint32_t baudRate;
     uint32_t wordLength;
@@ -31,8 +29,6 @@ extern uint8_t rxbyte;
 
 void UART_SendString(UART_HandleTypeDef *huart, const char *str);
 int UART_Init(UART_Driver *uart, UART_Config config);
-int init(UART_HandleTypeDef *huart, UART_Config config);
-
-void init_UART(void);
+void send_byte(UART_HandleTypeDef *huart, uint8_t byte);
 
 #endif // __UART_H

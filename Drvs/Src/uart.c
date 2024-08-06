@@ -6,7 +6,10 @@
  */
 
 #include "uart.h"
+#include "circular_bf.h"
+#include <string.h>
 
+volatile uint8_t Setstop = 0;
 uint8_t rxbyte;
 UART_Driver uart1 = { .huart.Instance = USART1, .isInitialized = 0 };
 UART_Driver uart2 = { .huart.Instance = USART2, .isInitialized = 0 };
@@ -88,17 +91,6 @@ int UART_Init(UART_Driver *uart, UART_Config config) {
     return 0; // Khởi tạo thành công
 }
 
-int init(UART_HandleTypeDef *huart, UART_Config config) {
-	if (huart->Instance == USART1) {
-		return UART_Init(&uart1, config);
-	} else if (huart->Instance == USART2) {
-		return UART_Init(&uart2, config);
-	} else if (huart->Instance == USART3) {
-		return UART_Init(&uart3, config);
-    } else {
-        return 1; // Không tìm thấy UART phù hợp
-    }
-}
 
 void UART_SendString(UART_HandleTypeDef *huart, const char *str) {
     HAL_UART_Transmit(huart, (uint8_t*)str, strlen(str), HAL_MAX_DELAY);
@@ -106,16 +98,10 @@ void UART_SendString(UART_HandleTypeDef *huart, const char *str) {
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-  /* Prevent unused argument(s) compilation warning */
-  UNUSED(huart);
-  /* NOTE: This function should not be modified, when the callback is needed,
-           the HAL_UART_RxCpltCallback could be implemented in the user file
-   */
   if (huart->Instance == USART1) {
-
-	  if (stopBlink){
+	  if (Setstop){
 		  if (rxbyte == 0x03) {  // Kiểm tra lệnh Ctrl+C
-			  stopBlink = 0;
+			  Setstop = 0;
 		  }
 		  else {
 			  HAL_UART_Transmit(&uart1.huart, &rxbyte, 1, HAL_MAX_DELAY);
@@ -125,4 +111,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 	  HAL_UART_Receive_IT(&uart1.huart, &rxbyte, 1);
   }
 }
-
+void send_byte(UART_HandleTypeDef *huart, uint8_t byte) {
+    HAL_UART_Transmit(huart, &byte, 1, HAL_MAX_DELAY);
+}

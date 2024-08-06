@@ -8,28 +8,14 @@
 
 #ifndef PROCESS_H
 #define PROCESS_H
-
-#include "uart.h"
-#include <stdlib.h>
+#include "stm32f1xx_hal.h"
 
 typedef struct {
     char *command;
     void (*handler)(char *);
 } CommandMapping;
 
-extern CommandMapping commandMap[];
-
-extern volatile uint8_t stopBlink;
-extern ADC_HandleTypeDef hadc1;
-#define PROMPT "#your-name:~ "
-
-void processCommand(char *cmd);
-void prompt(void);
-void handleLedOnCommand(char *args);
-void handleLedOffCommand(char *args);
-void handleLedBlinkCommand(char *args);
-void handleAdcGetCommand(char *args);
-void handleInfoCommand(char *args);
-void handleInvalidCommand(char *args);
-
+void processCommand(CommandMapping *ptr,char *cmd);
+void checkCtrlC(uint8_t data);
+void prompt();
 #endif /* PROCESS_H */

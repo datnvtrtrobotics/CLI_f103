@@ -25,9 +25,7 @@ Core/Src/stm32f1xx_it.o: ../Core/Src/stm32f1xx_it.c ../Core/Inc/main.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/stm32f1xx_it.h \
- /home/tdat/STM32CubeIDE/workspace_1.15.1/CLI_103/Drvs/Inc/uart.h \
- /home/tdat/STM32CubeIDE/workspace_1.15.1/CLI_103/Utils/Inc/circular_bf.h \
- /home/tdat/STM32CubeIDE/workspace_1.15.1/CLI_103/Utils/Inc/process.h
+ /home/tdat/STM32CubeIDE/workspace_1.15.1/CLI_103/Drvs/Inc/uart.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
 ../Core/Inc/stm32f1xx_hal_conf.h:
@@ -56,5 +54,3 @@ Core/Src/stm32f1xx_it.o: ../Core/Src/stm32f1xx_it.c ../Core/Inc/main.h \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 ../Core/Inc/stm32f1xx_it.h:
 /home/tdat/STM32CubeIDE/workspace_1.15.1/CLI_103/Drvs/Inc/uart.h:
-/home/tdat/STM32CubeIDE/workspace_1.15.1/CLI_103/Utils/Inc/circular_bf.h:
-/home/tdat/STM32CubeIDE/workspace_1.15.1/CLI_103/Utils/Inc/process.h:
