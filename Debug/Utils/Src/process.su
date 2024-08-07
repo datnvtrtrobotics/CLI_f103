@@ -1,3 +1,3 @@
 ../Utils/Src/process.c:20:6:processCommand	40	static
-../Utils/Src/process.c:48:6:checkCtrlC	16	static
-../Utils/Src/process.c:53:6:prompt	8	static
+../Utils/Src/process.c:55:6:checkCtrlC	16	static
+../Utils/Src/process.c:60:6:prompt	8	static

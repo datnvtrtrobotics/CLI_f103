@@ -1,7 +1,7 @@
-../App/Src/GPIO_handle.c:14:6:startBlinking	5
-../App/Src/GPIO_handle.c:27:6:handleLedOnCommand	2
-../App/Src/GPIO_handle.c:33:6:handleLedOffCommand	2
-../App/Src/GPIO_handle.c:38:6:handleLedBlinkCommand	1
-../App/Src/GPIO_handle.c:44:6:handleAdcGetCommand	7
-../App/Src/GPIO_handle.c:73:6:handleInfoCommand	2
-../App/Src/GPIO_handle.c:81:6:handleInvalidCommand	1
+../App/Src/GPIO_handle.c:12:6:startBlinking	5
+../App/Src/GPIO_handle.c:25:6:handleLedOnCommand	2
+../App/Src/GPIO_handle.c:31:6:handleLedOffCommand	2
+../App/Src/GPIO_handle.c:36:6:handleLedBlinkCommand	1
+../App/Src/GPIO_handle.c:42:6:handleAdcGetCommand	7
+../App/Src/GPIO_handle.c:71:6:handleInfoCommand	2
+../App/Src/GPIO_handle.c:79:6:handleInvalidCommand	1

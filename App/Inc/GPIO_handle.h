@@ -11,15 +11,13 @@
 #include "stm32f1xx_hal.h"
 
 extern volatile uint8_t Setstop;
-extern int count;
-extern uint8_t pins[3];
 extern ADC_HandleTypeDef hadc1;
 
-void handleLedOnCommand(char *args);
-void handleLedOffCommand(char *args);
-void handleLedBlinkCommand(char *args);
-void handleAdcGetCommand(char *args);
+void handleLedOnCommand(uint8_t *argvalue, uint8_t argcount);
+void handleLedOffCommand(uint8_t *argvalue, uint8_t argcount);
+void handleLedBlinkCommand(uint8_t *argvalue, uint8_t argcount);
+void handleAdcGetCommand(uint8_t *argvalue, uint8_t argcount);
 void handleInfoCommand(char *args);
-void handleInvalidCommand(char *args);
+void handleInvalidCommand();
 
 #endif // GPIO_HANDLE_H

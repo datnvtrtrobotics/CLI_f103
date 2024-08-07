@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <string.h>
 
-int count = 0;
-uint8_t pins[3];
 char msg[50];
 char response[100];
 uint32_t previous_time = 0;
@@ -24,31 +22,30 @@ void startBlinking(uint8_t *pins, int count) {
 		HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_RESET);
 	}
 }
-void handleLedOnCommand(char *args) {
-	for (int i = 0; i < count; i++) {
-		HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_SET);
+void handleLedOnCommand(uint8_t *argvalue, uint8_t argcount) {
+	for (int i = 0; i < argcount; i++) {
+		HAL_GPIO_WritePin(GPIOA, 1 << argvalue[i], GPIO_PIN_SET);
 	}
 }
 
-void handleLedOffCommand(char *args) {
-	for (int i = 0; i < count; i++) {
-		HAL_GPIO_WritePin(GPIOA, 1 << pins[i], GPIO_PIN_RESET);
+void handleLedOffCommand(uint8_t *argvalue, uint8_t argcount) {
+	for (int i = 0; i < argcount; i++) {
+		HAL_GPIO_WritePin(GPIOA, 1 << argvalue[i], GPIO_PIN_RESET);
 	}
 }
-void handleLedBlinkCommand(char *args) {
+void handleLedBlinkCommand(uint8_t *argvalue, uint8_t argcount) {
 	Setstop = 1;
 	UART_SendString(&uart1.huart, "\r\n");
-	startBlinking(pins, count);
+	startBlinking(argvalue, argcount);
 }
 
-void handleAdcGetCommand(char *args) {
+void handleAdcGetCommand(uint8_t *argvalue, uint8_t argcount) {
     ADC_ChannelConfTypeDef sConfig = {0};
-    for(int i; i< count; i++){
-		if (pins[i]==0||pins[i] ==1){
-			sConfig.Channel = (pins[i] == 0) ? ADC_CHANNEL_0 : ADC_CHANNEL_1;
+    for(int i = 0; i< argcount; i++){
+		if (argvalue[i]==0||argvalue[i] ==1){
+			sConfig.Channel = (argvalue[i] == 0) ? ADC_CHANNEL_0 : ADC_CHANNEL_1;
 			sConfig.Rank = ADC_REGULAR_RANK_1;
 			sConfig.SamplingTime = ADC_SAMPLETIME_28CYCLES_5;
-
 			if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
 				UART_SendString(&uart1.huart, "\r\nError: Failed to configure ADC channel.");
 				return;
@@ -60,13 +57,14 @@ void handleAdcGetCommand(char *args) {
 					HAL_ADC_PollForConversion(&hadc1, 100);
 					uint32_t value = HAL_ADC_GetValue(&hadc1);
 
-					snprintf(msg, sizeof(msg), "\r\nADC Value (PA%d): %lu", pins[i], value);
+					snprintf(msg, sizeof(msg), "\r\nADC Value (PA%d): %lu", argvalue[i], value);
 					HAL_UART_Transmit(&uart1.huart, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
 					previous_time = HAL_GetTick();
 				}
 			}
 		} else {
 			UART_SendString(&uart1.huart, "\r\nError: Invalid pin. Only PA0 and PA1 are allowed.");
+			return;
 		}
     }
 }
@@ -78,7 +76,7 @@ void handleInfoCommand(char *args) {
 		HAL_UART_Transmit(&uart1.huart, (uint8_t*)"Sample text: \r\n", 15, HAL_MAX_DELAY);
 	}
 }
-void handleInvalidCommand(char *args) {
+void handleInvalidCommand() {
     UART_SendString(&uart1.huart, "\n\rInvalid Command");
     prompt();
 }
