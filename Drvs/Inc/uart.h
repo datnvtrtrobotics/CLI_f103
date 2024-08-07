@@ -25,7 +25,6 @@ typedef struct {
 extern UART_Driver uart1;
 extern UART_Driver uart2;
 extern UART_Driver uart3;
-extern uint8_t rxbyte;
 
 void UART_SendString(UART_HandleTypeDef *huart, const char *str);
 int UART_Init(UART_Driver *uart, UART_Config config);

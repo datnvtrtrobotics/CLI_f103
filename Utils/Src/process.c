@@ -25,6 +25,7 @@ void processCommand(CommandMapping *ptr, char *cmd){
         	if (strcmp(token, "info") == 0){
         		handleInfoCommand(strtok(NULL, " "));
         		prompt();
+        		return;
         	}else{
         		char *token = strtok(NULL, " ");
         		uint8_t argvalue[MAX_COUNT] = {0};

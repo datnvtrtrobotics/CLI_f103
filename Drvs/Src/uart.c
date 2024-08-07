@@ -90,8 +90,6 @@ int UART_Init(UART_Driver *uart, UART_Config config) {
     uart->isInitialized = 1;
     return 0; // Khởi tạo thành công
 }
-
-
 void UART_SendString(UART_HandleTypeDef *huart, const char *str) {
     HAL_UART_Transmit(huart, (uint8_t*)str, strlen(str), HAL_MAX_DELAY);
 }
