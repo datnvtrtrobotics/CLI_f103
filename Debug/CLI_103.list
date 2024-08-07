@@ -224,7 +224,7 @@ void startBlinking(uint8_t *pins, int count) {
  800023c:	af00      	add	r7, sp, #0
  800023e:	6078      	str	r0, [r7, #4]
  8000240:	6039      	str	r1, [r7, #0]
-	while(Setstop){
+	while(!Setstop){
  8000242:	e022      	b.n	800028a <startBlinking+0x52>
 		if((HAL_GetTick()- previous_time) >200){
  8000244:	f000 fd90 	bl	8000d68 <HAL_GetTick>
@@ -264,12 +264,12 @@ void startBlinking(uint8_t *pins, int count) {
  8000284:	4603      	mov	r3, r0
  8000286:	4a11      	ldr	r2, [pc, #68]	@ (80002cc <startBlinking+0x94>)
  8000288:	6013      	str	r3, [r2, #0]
-	while(Setstop){
+	while(!Setstop){
  800028a:	4b12      	ldr	r3, [pc, #72]	@ (80002d4 <startBlinking+0x9c>)
  800028c:	781b      	ldrb	r3, [r3, #0]
  800028e:	b2db      	uxtb	r3, r3
  8000290:	2b00      	cmp	r3, #0
- 8000292:	d1d7      	bne.n	8000244 <startBlinking+0xc>
+ 8000292:	d0d7      	beq.n	8000244 <startBlinking+0xc>
 		}
 	}
 	for (int i = 0; i < count; i++) {
@@ -306,7 +306,7 @@ void startBlinking(uint8_t *pins, int count) {
  80002ca:	bd80      	pop	{r7, pc}
  80002cc:	200003c0 	.word	0x200003c0
  80002d0:	40010800 	.word	0x40010800
- 80002d4:	200004d0 	.word	0x200004d0
+ 80002d4:	20000049 	.word	0x20000049
 
 080002d8 <handleLedOnCommand>:
 void handleLedOnCommand(uint8_t *argvalue, uint8_t argcount) {
@@ -401,9 +401,9 @@ void handleLedBlinkCommand(uint8_t *argvalue, uint8_t argcount) {
  800036e:	6078      	str	r0, [r7, #4]
  8000370:	460b      	mov	r3, r1
  8000372:	70fb      	strb	r3, [r7, #3]
-	Setstop = 1;
+	Setstop = 0;
  8000374:	4b07      	ldr	r3, [pc, #28]	@ (8000394 <handleLedBlinkCommand+0x2c>)
- 8000376:	2201      	movs	r2, #1
+ 8000376:	2200      	movs	r2, #0
  8000378:	701a      	strb	r2, [r3, #0]
 	UART_SendString(&uart1.huart, "\r\n");
  800037a:	4907      	ldr	r1, [pc, #28]	@ (8000398 <handleLedBlinkCommand+0x30>)
@@ -419,7 +419,7 @@ void handleLedBlinkCommand(uint8_t *argvalue, uint8_t argcount) {
  800038e:	3708      	adds	r7, #8
  8000390:	46bd      	mov	sp, r7
  8000392:	bd80      	pop	{r7, pc}
- 8000394:	200004d0 	.word	0x200004d0
+ 8000394:	20000049 	.word	0x20000049
  8000398:	08005170 	.word	0x08005170
  800039c:	2000004c 	.word	0x2000004c
 
@@ -487,11 +487,11 @@ void handleAdcGetCommand(uint8_t *argvalue, uint8_t argcount) {
 				return;
  800040c:	e046      	b.n	800049c <handleAdcGetCommand+0xfc>
 			}
-			Setstop = 1;
+			Setstop = 0;
  800040e:	4b28      	ldr	r3, [pc, #160]	@ (80004b0 <handleAdcGetCommand+0x110>)
- 8000410:	2201      	movs	r2, #1
+ 8000410:	2200      	movs	r2, #0
  8000412:	701a      	strb	r2, [r3, #0]
-			while(Setstop){
+			while(!Setstop){
  8000414:	e030      	b.n	8000478 <handleAdcGetCommand+0xd8>
 				if((HAL_GetTick()- previous_time) >1000){
  8000416:	f000 fca7 	bl	8000d68 <HAL_GetTick>
@@ -540,12 +540,12 @@ void handleAdcGetCommand(uint8_t *argvalue, uint8_t argcount) {
  8000472:	4603      	mov	r3, r0
  8000474:	4a0f      	ldr	r2, [pc, #60]	@ (80004b4 <handleAdcGetCommand+0x114>)
  8000476:	6013      	str	r3, [r2, #0]
-			while(Setstop){
+			while(!Setstop){
  8000478:	4b0d      	ldr	r3, [pc, #52]	@ (80004b0 <handleAdcGetCommand+0x110>)
  800047a:	781b      	ldrb	r3, [r3, #0]
  800047c:	b2db      	uxtb	r3, r3
  800047e:	2b00      	cmp	r3, #0
- 8000480:	d1c9      	bne.n	8000416 <handleAdcGetCommand+0x76>
+ 8000480:	d0c9      	beq.n	8000416 <handleAdcGetCommand+0x76>
 		if (argvalue[i]==0||argvalue[i] ==1){
  8000482:	e004      	b.n	800048e <handleAdcGetCommand+0xee>
 				}
@@ -575,7 +575,7 @@ void handleAdcGetCommand(uint8_t *argvalue, uint8_t argcount) {
  80004a4:	200003c4 	.word	0x200003c4
  80004a8:	08005174 	.word	0x08005174
  80004ac:	2000004c 	.word	0x2000004c
- 80004b0:	200004d0 	.word	0x200004d0
+ 80004b0:	20000049 	.word	0x20000049
  80004b4:	200003c0 	.word	0x200003c0
  80004b8:	080051a0 	.word	0x080051a0
  80004bc:	20000328 	.word	0x20000328
@@ -10068,20 +10068,20 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  80039c4:	4a12      	ldr	r2, [pc, #72]	@ (8003a10 <HAL_UART_RxCpltCallback+0x58>)
  80039c6:	4293      	cmp	r3, r2
  80039c8:	d11e      	bne.n	8003a08 <HAL_UART_RxCpltCallback+0x50>
-	  if (Setstop){
+	  if (!Setstop){
  80039ca:	4b12      	ldr	r3, [pc, #72]	@ (8003a14 <HAL_UART_RxCpltCallback+0x5c>)
  80039cc:	781b      	ldrb	r3, [r3, #0]
  80039ce:	b2db      	uxtb	r3, r3
  80039d0:	2b00      	cmp	r3, #0
- 80039d2:	d00e      	beq.n	80039f2 <HAL_UART_RxCpltCallback+0x3a>
+ 80039d2:	d10e      	bne.n	80039f2 <HAL_UART_RxCpltCallback+0x3a>
 		  if (rxbyte == 0x03) {  // Kiểm tra lệnh Ctrl+C
  80039d4:	4b10      	ldr	r3, [pc, #64]	@ (8003a18 <HAL_UART_RxCpltCallback+0x60>)
  80039d6:	781b      	ldrb	r3, [r3, #0]
  80039d8:	2b03      	cmp	r3, #3
  80039da:	d103      	bne.n	80039e4 <HAL_UART_RxCpltCallback+0x2c>
-			  Setstop = 0;
+			  Setstop = 1;
  80039dc:	4b0d      	ldr	r3, [pc, #52]	@ (8003a14 <HAL_UART_RxCpltCallback+0x5c>)
- 80039de:	2200      	movs	r2, #0
+ 80039de:	2201      	movs	r2, #1
  80039e0:	701a      	strb	r2, [r3, #0]
  80039e2:	e006      	b.n	80039f2 <HAL_UART_RxCpltCallback+0x3a>
 		  }
@@ -10112,8 +10112,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
  8003a0c:	46bd      	mov	sp, r7
  8003a0e:	bd80      	pop	{r7, pc}
  8003a10:	40013800 	.word	0x40013800
- 8003a14:	200004d0 	.word	0x200004d0
- 8003a18:	200004d1 	.word	0x200004d1
+ 8003a14:	20000049 	.word	0x20000049
+ 8003a18:	200004d0 	.word	0x200004d0
  8003a1c:	2000004c 	.word	0x2000004c
  8003a20:	20000224 	.word	0x20000224
 

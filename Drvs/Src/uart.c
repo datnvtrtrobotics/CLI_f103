@@ -10,7 +10,7 @@
 #include "CLI.h"
 #include <string.h>
 
-volatile uint8_t Setstop = 0;
+volatile uint8_t Setstop = 1;
 uint8_t rxbyte;
 extern CircularBuffer rxBuffer;
 UART_Driver uart1 = { .huart.Instance = USART1, .isInitialized = 0 };
@@ -99,9 +99,9 @@ void UART_SendString(UART_HandleTypeDef *huart, const char *str) {
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
   if (huart->Instance == USART1) {
-	  if (Setstop){
+	  if (!Setstop){
 		  if (rxbyte == 0x03) {  // Kiểm tra lệnh Ctrl+C
-			  Setstop = 0;
+			  Setstop = 1;
 		  }
 		  else {
 			  HAL_UART_Transmit(&uart1.huart, &rxbyte, 1, HAL_MAX_DELAY);

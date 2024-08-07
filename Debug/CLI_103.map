@@ -3624,7 +3624,9 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .data.uwTickFreq
                 0x20000048        0x1 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
                 0x20000048                uwTickFreq
- *fill*         0x20000049        0x3 
+ .data.Setstop  0x20000049        0x1 ./Drvs/Src/uart.o
+                0x20000049                Setstop
+ *fill*         0x2000004a        0x2 
  .data.uart1    0x2000004c       0x5c ./Drvs/Src/uart.o
                 0x2000004c                uart1
  .data.__sglue  0x200000a8        0xc /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
@@ -3680,11 +3682,9 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
                 0x200004c8        0x4 ./Core/Src/sysmem.o
  .bss.uwTick    0x200004cc        0x4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
                 0x200004cc                uwTick
- .bss.Setstop   0x200004d0        0x1 ./Drvs/Src/uart.o
-                0x200004d0                Setstop
- .bss.rxbyte    0x200004d1        0x1 ./Drvs/Src/uart.o
-                0x200004d1                rxbyte
- *fill*         0x200004d2        0x2 
+ .bss.rxbyte    0x200004d0        0x1 ./Drvs/Src/uart.o
+                0x200004d0                rxbyte
+ *fill*         0x200004d1        0x3 
  .bss.__sf      0x200004d4      0x138 /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
                 0x200004d4                __sf
  .bss.__stdio_exit_handler

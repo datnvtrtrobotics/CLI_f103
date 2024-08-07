@@ -10,7 +10,7 @@ char response[100];
 uint32_t previous_time = 0;
 
 void startBlinking(uint8_t *pins, int count) {
-	while(Setstop){
+	while(!Setstop){
 		if((HAL_GetTick()- previous_time) >200){
 			for (int i = 0; i < count; i++) {
 				HAL_GPIO_TogglePin(GPIOA, 1 << pins[i]);
@@ -34,7 +34,7 @@ void handleLedOffCommand(uint8_t *argvalue, uint8_t argcount) {
 	}
 }
 void handleLedBlinkCommand(uint8_t *argvalue, uint8_t argcount) {
-	Setstop = 1;
+	Setstop = 0;
 	UART_SendString(&uart1.huart, "\r\n");
 	startBlinking(argvalue, argcount);
 }
@@ -50,8 +50,8 @@ void handleAdcGetCommand(uint8_t *argvalue, uint8_t argcount) {
 				UART_SendString(&uart1.huart, "\r\nError: Failed to configure ADC channel.");
 				return;
 			}
-			Setstop = 1;
-			while(Setstop){
+			Setstop = 0;
+			while(!Setstop){
 				if((HAL_GetTick()- previous_time) >1000){
 					HAL_ADC_Start(&hadc1);
 					HAL_ADC_PollForConversion(&hadc1, 100);
