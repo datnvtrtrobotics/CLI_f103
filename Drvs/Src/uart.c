@@ -7,10 +7,12 @@
 
 #include "uart.h"
 #include "circular_bf.h"
+#include "CLI.h"
 #include <string.h>
 
 volatile uint8_t Setstop = 0;
 uint8_t rxbyte;
+extern CircularBuffer rxBuffer;
 UART_Driver uart1 = { .huart.Instance = USART1, .isInitialized = 0 };
 UART_Driver uart2 = { .huart.Instance = USART2, .isInitialized = 0 };
 UART_Driver uart3 = { .huart.Instance = USART3, .isInitialized = 0 };

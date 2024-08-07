@@ -10,9 +10,11 @@
 #include "circular_bf.h"
 #include "GPIO_handle.h"
 #include "process.h"
+
 uint8_t byte;
 uint16_t myindex = 0;
 char buffer[BUFFER_SIZE];
+CircularBuffer rxBuffer = { {0}, 0, 0 };
 
 UART_Config uartConfig = {
 .baudRate = 115200,
@@ -20,7 +22,6 @@ UART_Config uartConfig = {
 .stopBits = UART_STOPBITS_1,
 .parity = UART_PARITY_NONE,
 };
-
 CommandMapping commandMap[] = {
     {"led-on", handleLedOnCommand},
     {"led-off", handleLedOffCommand},

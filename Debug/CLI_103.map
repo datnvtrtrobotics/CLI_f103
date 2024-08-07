@@ -3657,34 +3657,34 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
                 0x20000122                myindex
  .bss.buffer    0x20000124      0x100 ./App/Src/CLI.o
                 0x20000124                buffer
- .bss.msg       0x20000224       0x32 ./App/Src/GPIO_handle.o
-                0x20000224                msg
- *fill*         0x20000256        0x2 
- .bss.response  0x20000258       0x64 ./App/Src/GPIO_handle.o
-                0x20000258                response
+ .bss.rxBuffer  0x20000224      0x104 ./App/Src/CLI.o
+                0x20000224                rxBuffer
+ .bss.msg       0x20000328       0x32 ./App/Src/GPIO_handle.o
+                0x20000328                msg
+ *fill*         0x2000035a        0x2 
+ .bss.response  0x2000035c       0x64 ./App/Src/GPIO_handle.o
+                0x2000035c                response
  .bss.previous_time
-                0x200002bc        0x4 ./App/Src/GPIO_handle.o
-                0x200002bc                previous_time
- .bss.hadc1     0x200002c0       0x30 ./Core/Src/main.o
-                0x200002c0                hadc1
+                0x200003c0        0x4 ./App/Src/GPIO_handle.o
+                0x200003c0                previous_time
+ .bss.hadc1     0x200003c4       0x30 ./Core/Src/main.o
+                0x200003c4                hadc1
  .bss.hdma_adc1
-                0x200002f0       0x44 ./Core/Src/main.o
-                0x200002f0                hdma_adc1
- .bss.huart1    0x20000334       0x48 ./Core/Src/main.o
-                0x20000334                huart1
- .bss.huart2    0x2000037c       0x48 ./Core/Src/main.o
-                0x2000037c                huart2
+                0x200003f4       0x44 ./Core/Src/main.o
+                0x200003f4                hdma_adc1
+ .bss.huart1    0x20000438       0x48 ./Core/Src/main.o
+                0x20000438                huart1
+ .bss.huart2    0x20000480       0x48 ./Core/Src/main.o
+                0x20000480                huart2
  .bss.__sbrk_heap_end
-                0x200003c4        0x4 ./Core/Src/sysmem.o
- .bss.uwTick    0x200003c8        0x4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
-                0x200003c8                uwTick
- .bss.Setstop   0x200003cc        0x1 ./Drvs/Src/uart.o
-                0x200003cc                Setstop
- .bss.rxbyte    0x200003cd        0x1 ./Drvs/Src/uart.o
-                0x200003cd                rxbyte
- *fill*         0x200003ce        0x2 
- .bss.rxBuffer  0x200003d0      0x104 ./Utils/Src/circular_bf.o
-                0x200003d0                rxBuffer
+                0x200004c8        0x4 ./Core/Src/sysmem.o
+ .bss.uwTick    0x200004cc        0x4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+                0x200004cc                uwTick
+ .bss.Setstop   0x200004d0        0x1 ./Drvs/Src/uart.o
+                0x200004d0                Setstop
+ .bss.rxbyte    0x200004d1        0x1 ./Drvs/Src/uart.o
+                0x200004d1                rxbyte
+ *fill*         0x200004d2        0x2 
  .bss.__sf      0x200004d4      0x138 /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
                 0x200004d4                __sf
  .bss.__stdio_exit_handler
@@ -3871,29 +3871,29 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
 LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libm.a
 LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.0.100.202403111256/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/libgcc.a
 
-.debug_info     0x00000000     0xba76
- .debug_info    0x00000000      0x8d9 ./App/Src/CLI.o
- .debug_info    0x000008d9      0xc41 ./App/Src/GPIO_handle.o
- .debug_info    0x0000151a      0xea9 ./Core/Src/main.o
- .debug_info    0x000023c3      0xcd5 ./Core/Src/stm32f1xx_hal_msp.o
- .debug_info    0x00003098      0x69f ./Core/Src/stm32f1xx_it.o
- .debug_info    0x00003737      0x6a3 ./Core/Src/syscalls.o
- .debug_info    0x00003dda      0x168 ./Core/Src/sysmem.o
- .debug_info    0x00003f42      0x222 ./Core/Src/system_stm32f1xx.o
- .debug_info    0x00004164       0x30 ./Core/Startup/startup_stm32f103c8tx.o
- .debug_info    0x00004194      0x704 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
- .debug_info    0x00004898      0xc50 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
- .debug_info    0x000054e8      0xa87 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
- .debug_info    0x00005f6f      0x6d2 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o
- .debug_info    0x00006641      0x5ab ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
- .debug_info    0x00006bec      0x7d5 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
- .debug_info    0x000073c1      0x3c0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
- .debug_info    0x00007781     0x2fa8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
- .debug_info    0x0000a729      0xa3e ./Drvs/Src/uart.o
- .debug_info    0x0000b167      0x18b ./Utils/Src/circular_bf.o
- .debug_info    0x0000b2f2      0x784 ./Utils/Src/process.o
+.debug_info     0x00000000     0xba61
+ .debug_info    0x00000000      0x8de ./App/Src/CLI.o
+ .debug_info    0x000008de      0xc41 ./App/Src/GPIO_handle.o
+ .debug_info    0x0000151f      0xea9 ./Core/Src/main.o
+ .debug_info    0x000023c8      0xcd5 ./Core/Src/stm32f1xx_hal_msp.o
+ .debug_info    0x0000309d      0x69f ./Core/Src/stm32f1xx_it.o
+ .debug_info    0x0000373c      0x6a3 ./Core/Src/syscalls.o
+ .debug_info    0x00003ddf      0x168 ./Core/Src/sysmem.o
+ .debug_info    0x00003f47      0x222 ./Core/Src/system_stm32f1xx.o
+ .debug_info    0x00004169       0x30 ./Core/Startup/startup_stm32f103c8tx.o
+ .debug_info    0x00004199      0x704 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_info    0x0000489d      0xc50 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.o
+ .debug_info    0x000054ed      0xa87 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_info    0x00005f74      0x6d2 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o
+ .debug_info    0x00006646      0x5ab ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_info    0x00006bf1      0x7d5 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_info    0x000073c6      0x3c0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
+ .debug_info    0x00007786     0x2fa8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
+ .debug_info    0x0000a72e      0xa3e ./Drvs/Src/uart.o
+ .debug_info    0x0000b16c      0x171 ./Utils/Src/circular_bf.o
+ .debug_info    0x0000b2dd      0x784 ./Utils/Src/process.o
 
-.debug_abbrev   0x00000000     0x25c3
+.debug_abbrev   0x00000000     0x25a1
  .debug_abbrev  0x00000000      0x1d5 ./App/Src/CLI.o
  .debug_abbrev  0x000001d5      0x26b ./App/Src/GPIO_handle.o
  .debug_abbrev  0x00000440      0x291 ./Core/Src/main.o
@@ -3912,8 +3912,8 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .debug_abbrev  0x00001bcb      0x188 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
  .debug_abbrev  0x00001d53      0x2f8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
  .debug_abbrev  0x0000204b      0x260 ./Drvs/Src/uart.o
- .debug_abbrev  0x000022ab      0x121 ./Utils/Src/circular_bf.o
- .debug_abbrev  0x000023cc      0x1f7 ./Utils/Src/process.o
+ .debug_abbrev  0x000022ab       0xff ./Utils/Src/circular_bf.o
+ .debug_abbrev  0x000023aa      0x1f7 ./Utils/Src/process.o
 
 .debug_aranges  0x00000000      0x998
  .debug_aranges
@@ -4000,7 +4000,7 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .debug_rnglists
                 0x00000714       0x20 ./Utils/Src/process.o
 
-.debug_macro    0x00000000    0x18d75
+.debug_macro    0x00000000    0x18d7f
  .debug_macro   0x00000000      0x1d3 ./App/Src/CLI.o
  .debug_macro   0x000001d3      0xaa8 ./App/Src/CLI.o
  .debug_macro   0x00000c7b      0x221 ./App/Src/CLI.o
@@ -4104,12 +4104,12 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .debug_macro   0x000182a2      0x1b4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
  .debug_macro   0x00018456      0x1a2 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
  .debug_macro   0x000185f8      0x1a3 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
- .debug_macro   0x0001879b      0x283 ./Drvs/Src/uart.o
- .debug_macro   0x00018a1e       0x10 ./Drvs/Src/uart.o
- .debug_macro   0x00018a2e       0x73 ./Utils/Src/circular_bf.o
- .debug_macro   0x00018aa1      0x2d4 ./Utils/Src/process.o
+ .debug_macro   0x0001879b      0x28d ./Drvs/Src/uart.o
+ .debug_macro   0x00018a28       0x10 ./Drvs/Src/uart.o
+ .debug_macro   0x00018a38       0x73 ./Utils/Src/circular_bf.o
+ .debug_macro   0x00018aab      0x2d4 ./Utils/Src/process.o
 
-.debug_line     0x00000000     0xca61
+.debug_line     0x00000000     0xcaa3
  .debug_line    0x00000000      0x766 ./App/Src/CLI.o
  .debug_line    0x00000766      0xa4b ./App/Src/GPIO_handle.o
  .debug_line    0x000011b1      0x815 ./Core/Src/main.o
@@ -4127,9 +4127,9 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .debug_line    0x0000768c      0xcfe ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
  .debug_line    0x0000838a      0x83f ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o
  .debug_line    0x00008bc9     0x283e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
- .debug_line    0x0000b407      0x938 ./Drvs/Src/uart.o
- .debug_line    0x0000bd3f      0x400 ./Utils/Src/circular_bf.o
- .debug_line    0x0000c13f      0x922 ./Utils/Src/process.o
+ .debug_line    0x0000b407      0x97a ./Drvs/Src/uart.o
+ .debug_line    0x0000bd81      0x400 ./Utils/Src/circular_bf.o
+ .debug_line    0x0000c181      0x922 ./Utils/Src/process.o
 
 .debug_str      0x00000000    0x88fb3
  .debug_str     0x00000000    0x8152d ./App/Src/CLI.o
@@ -4167,9 +4167,9 @@ LOAD /opt/st/stm32cubeide_1.15.1/plugins/com.st.stm32cube.ide.mcu.externaltools.
  .debug_str     0x00088906      0x5e3 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
                               0x81dcd (size before relaxing)
  .debug_str     0x00088ee9       0x35 ./Drvs/Src/uart.o
-                              0x849e9 (size before relaxing)
+                              0x849f0 (size before relaxing)
  .debug_str     0x00088f1e       0x20 ./Utils/Src/circular_bf.o
-                               0x3d6f (size before relaxing)
+                               0x3d66 (size before relaxing)
  .debug_str     0x00088f3e       0x75 ./Utils/Src/process.o
                               0x849f9 (size before relaxing)
 

@@ -19,7 +19,6 @@
 int check_arg(char *args);
 void processCommand(CommandMapping *ptr, char *cmd){
     char *token = strtok(cmd, " ");
-
     for (CommandMapping *mapping = ptr; mapping->command != NULL; mapping++) {
         if (strcmp(token, mapping->command) == 0) {
         	if (strcmp(token, "info") == 0){

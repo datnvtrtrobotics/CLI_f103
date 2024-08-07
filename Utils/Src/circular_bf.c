@@ -7,8 +7,6 @@
 
 #include "circular_bf.h"
 
-CircularBuffer rxBuffer = { {0}, 0, 0 };
-
 int CircularBuffer_Write(CircularBuffer *cb, uint8_t data) {
     uint16_t next = (cb->head + 1) % BUFFER_SIZE;
     if (next == cb->tail) {

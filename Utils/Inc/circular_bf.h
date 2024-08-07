@@ -14,7 +14,6 @@ typedef struct {
 	volatile uint16_t head;
 	volatile uint16_t tail;
 } CircularBuffer;
-extern CircularBuffer rxBuffer;
 
 int CircularBuffer_Write(CircularBuffer *cb, uint8_t data);
 int CircularBuffer_Read(CircularBuffer *cb, uint8_t *data);
