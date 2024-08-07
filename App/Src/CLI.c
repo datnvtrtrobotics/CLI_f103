@@ -32,8 +32,7 @@ CommandMapping commandMap[] = {
 };
 void main_loop(void) {
 	if (UART_Init(&uart1,uartConfig) !=0){
-		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
-		return;
+		Error_Handler();
 	}
 	HAL_UART_Receive_IT(&uart1.huart, &byte, 1);
 
