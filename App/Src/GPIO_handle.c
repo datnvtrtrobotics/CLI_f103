@@ -77,16 +77,6 @@ void handleInfoCommand(uint8_t *argvalue, uint8_t argcount) {
 	}
 }
 void handleInvalidCommand(uint8_t *argvalue, uint8_t argcount) {
-    char response[256]; // Buffer to hold the error message
-
-    // Generate the error message
     snprintf(response, sizeof(response), "\r\nError: Invalid command \"%s\". Please try again.", argvalue);
-
-    // Transmit the error message over UART
     HAL_UART_Transmit(&uart1.huart, (uint8_t*)response, strlen(response), HAL_MAX_DELAY);
 }
-//void handleInvalidCommand() {
-//    UART_SendString(&uart1.huart, "\n\rInvalid Command");
-//    prompt();
-//}
-

@@ -4,4 +4,4 @@
 ../App/Src/GPIO_handle.c:36:6:handleLedBlinkCommand	16	static
 ../App/Src/GPIO_handle.c:42:6:handleAdcGetCommand	48	static
 ../App/Src/GPIO_handle.c:71:6:handleInfoCommand	16	static
-../App/Src/GPIO_handle.c:79:6:handleInvalidCommand	272	static
+../App/Src/GPIO_handle.c:79:6:handleInvalidCommand	16	static
