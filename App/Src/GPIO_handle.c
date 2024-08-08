@@ -68,16 +68,25 @@ void handleAdcGetCommand(uint8_t *argvalue, uint8_t argcount) {
 		}
     }
 }
-void handleInfoCommand(char *args) {
-	if (args != NULL) {
-		snprintf(response, sizeof(response), "\r\nSample text: %s", args);
-		HAL_UART_Transmit(&uart1.huart, (uint8_t*)response, strlen(response), HAL_MAX_DELAY);
+void handleInfoCommand(uint8_t *argvalue, uint8_t argcount) {
+	if (argvalue == NULL || strlen((char *)argvalue) == 0) {
+		UART_SendString(&uart1.huart, "Sample text: Default message");
 	} else {
-		HAL_UART_Transmit(&uart1.huart, (uint8_t*)"Sample text: \r\n", 15, HAL_MAX_DELAY);
+		snprintf(response, sizeof(response), "\r\nSample text: %s", argvalue);
+		HAL_UART_Transmit(&uart1.huart, (uint8_t*)response, strlen(response), HAL_MAX_DELAY);
 	}
 }
-void handleInvalidCommand() {
-    UART_SendString(&uart1.huart, "\n\rInvalid Command");
-    prompt();
+void handleInvalidCommand(uint8_t *argvalue, uint8_t argcount) {
+    char response[256]; // Buffer to hold the error message
+
+    // Generate the error message
+    snprintf(response, sizeof(response), "\r\nError: Invalid command \"%s\". Please try again.", argvalue);
+
+    // Transmit the error message over UART
+    HAL_UART_Transmit(&uart1.huart, (uint8_t*)response, strlen(response), HAL_MAX_DELAY);
 }
+//void handleInvalidCommand() {
+//    UART_SendString(&uart1.huart, "\n\rInvalid Command");
+//    prompt();
+//}
 

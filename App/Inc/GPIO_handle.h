@@ -17,7 +17,7 @@ void handleLedOnCommand(uint8_t *argvalue, uint8_t argcount);
 void handleLedOffCommand(uint8_t *argvalue, uint8_t argcount);
 void handleLedBlinkCommand(uint8_t *argvalue, uint8_t argcount);
 void handleAdcGetCommand(uint8_t *argvalue, uint8_t argcount);
-void handleInfoCommand(char *args);
-void handleInvalidCommand();
+void handleInfoCommand(uint8_t *argvalue, uint8_t argcount);
+void handleInvalidCommand(uint8_t *argvalue, uint8_t argcount);
 
 #endif // GPIO_HANDLE_H

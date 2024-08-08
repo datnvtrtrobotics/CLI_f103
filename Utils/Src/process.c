@@ -21,11 +21,11 @@ void processCommand(CommandMapping *ptr, char *cmd){
     char *token = strtok(cmd, " ");
     for (CommandMapping *mapping = ptr; mapping->command != NULL; mapping++) {
         if (strcmp(token, mapping->command) == 0) {
-        	if (strcmp(token, "info") == 0){
-        		handleInfoCommand(strtok(NULL, " "));
-        		prompt();
-        		return;
-        	}else{
+    		if (strcmp(token, "info") == 0){
+				handleInfoCommand((uint8_t *)strtok(NULL, ""), 0);
+				prompt();
+				return;
+			}else{
         		char *token = strtok(NULL, " ");
         		uint8_t argvalue[MAX_COUNT] = {0};
         		uint8_t argcount = 0;
@@ -44,13 +44,15 @@ void processCommand(CommandMapping *ptr, char *cmd){
 			if (argcount > MAX_COUNT) {
 				UART_SendString(&uart1.huart, "\r\nError: Too many arguments.");
 			}
+
         	mapping->handler(argvalue, argcount);
         	prompt();
         	return;
-        	}
+			}
         }
     }
-    handleInvalidCommand(NULL);
+    handleInvalidCommand((uint8_t *)token, 0);
+    prompt();
 }
 void checkCtrlC(uint8_t data){
 	if (data == 0x03){
